@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentGo - Main Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0f0f0;
+        }
+
+        header, footer {
+            width: 100%;
+            height: 8%;
+            background-color: rgb(192, 0, 13);
+            position: fixed;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        header { top: 0; }
+        footer { bottom: 0; }
+
+        .container {
+            max-width: 1200px;
+            margin: 100px auto;
+            padding: 20px;
+        }
+
+        .box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid black;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .announcements, .deadlines {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .deadline {
+            background: rgba(192, 0, 13, 0.1);
+            padding: 15px;
+            border-radius: 5px;
+            flex: 1 1 calc(33.33% - 20px);
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .deadline-square {
+            width: 30px;
+            height: 30px;
+            background: white;
+            border: 3px solid black;
+            flex-shrink: 0;
+        }
+
+        .announcement {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border: 1px solid black;
+            background: white;
+            border-radius: 5px;
+        }
+
+        .announcement-circle {
+            width: 30px;
+            height: 30px;
+            background: white;
+            border: 3px solid black;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .announcement, .deadline {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>Main Page</header>
+
+<div class="container">
+    <div class="box">
+        <div class="section-title">Deadlines</div>
+        <div class="deadlines">
+            <div class="deadline">
+                <div class="deadline-square"></div>
+                <div>
+                    <b>CSS151: Software Engineering 1</b><br>
+                    Due Activities:<br>
+                    • Design Document - January 31, 2025<br>
+                    • Mock UI (Wireframe) - January 31, 2025
+                </div>
+            </div>
+            <div class="deadline">
+                <div class="deadline-square"></div>
+                <div>
+                    <b>CSS151L: Software Engineering 1 Lab</b><br>
+                    Due Activities:<br>
+                    • Software Code Snippets - February 5, 2025<br>
+                    • Coursera Resubmission - February 20, 2025
+                </div>
+            </div>
+            <div class="deadline">
+                <div class="deadline-square"></div>
+                <div>
+                    <b>CSS133: Algorithms and Complexity</b><br>
+                    Due Activities:<br>
+                    • Quiz #1 - February 3, 2025<br>
+                    • Coursera - February 27, 2025<br>
+                    • Assignment #2 - February 27, 2025
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <div class="section-title">Announcements</div>
+        <div class="announcements">
+            <div class="announcement">
+                <div class="announcement-circle"></div>
+                Asynchronous Classes for all sections today.
+            </div>
+            <div class="announcement">
+                <div class="announcement-circle"></div>
+                Final Exam moved to Feb. 3, 2025.
+            </div>
+            <div class="announcement">
+                <div class="announcement-circle"></div>
+                Physics Olympian registration is now open!
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>StudentGo © 2025</footer>
+
+</body>
+</html>
