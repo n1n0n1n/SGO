@@ -14,37 +14,90 @@
 
         header, footer {
             width: 100%;
-            height: 8%;
+            height: 60px; /* Fixed height in pixels instead of percentage */
             background-color: rgb(192, 0, 13);
             position: fixed;
             z-index: 2;
             display: flex;
             align-items: center;
-            justify-content: center;
             color: white;
             font-size: 18px;
-            font-weight: bold;
             border: 2px solid black;
+            box-sizing: border-box;
         }
-        header { top: 0; }
-        footer { bottom: 0; }
+        header { 
+            top: 0; 
+            padding: 0 20px;
+            justify-content: space-between;
+        }
+        footer { 
+            bottom: 0; 
+            justify-content: center;
+            font-weight: bold;
+            height: 50px; /* Fixed height in pixels */
+        }
+
+        /* Header navigation styles */
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .bird-icon {
+            height: 40px;
+            width: auto;
+            cursor: pointer;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-right: 20px;
+        }
+
+        .nav-icon {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .nav-item {
+            cursor: pointer;
+            padding: 0 10px;
+            font-weight: normal;
+        }
+
+        .profile-icon {
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            border: 1px solid white;
+        }
+
+        .icon-svg {
+            fill: white;
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
 
         .container {
             max-width: 1200px;
-            margin: 40px auto 60px; /* Adjusted margin to reduce space */
+            margin: 0 auto 60px;
             padding: 20px;
         }
 
         /* StudentGo Section */
         .container--0- {
             text-align: center;
-            padding: 30px;
+            padding: 20px;
             background: #f8d7da;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin-bottom: 10px; /* Reduced space between this and the next section */
+            margin-bottom: 30px;
             border: 2px solid black;
-            margin-top: 30px; /* Increased space before StudentGo */
+            margin-top: 38px; /* Exact height of header */
         }
 
         /* Updated StudentGo heading */
@@ -52,13 +105,13 @@
             font-size: 32px;
             font-weight: bold;
             color: black;
-            margin-top: 20px; /* Added space before StudentGo */
+            margin-top: 20px;
         }
         
         .text-1-2-1 {
             font-size: 16px;
             color: gray;
-            margin-top: -10px; /* Moves it closer to StudentGo */
+            margin-top: -10px;
         }
 
         .container-0-1-1 {
@@ -199,7 +252,27 @@
 </head>
 <body>
 
-<header></header>
+<header>
+    <div class="header-left">
+        <a href="#"><img src="BIRDicon.png" alt="Bird Icon" class="bird-icon"></a>
+    </div>
+    <div class="header-right">
+        <div class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" fill="white" viewBox="0 0 16 16">
+                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+            </svg>
+        </div>
+        <div class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" fill="white" viewBox="0 0 16 16">
+                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
+            </svg>
+        </div>
+        <div class="nav-item">Services</div>
+        <div class="nav-item">Organizations</div>
+        <div class="nav-item">Contact</div>
+        <img src="PFPicon.png" alt="Profile Icon" class="profile-icon">
+    </div>
+</header>
 
 <div class="container--0-">
     <h1 class="text-1-2-0">StudentGo</h1>
