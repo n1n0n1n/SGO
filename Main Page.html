@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentGo - Main Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0f0f0;
+        }
+
+        header, footer {
+            width: 100%;
+            height: 8%;
+            background-color: rgb(192, 0, 13);
+            position: fixed;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border: 2px solid black;
+        }
+        header { top: 0; }
+        footer { bottom: 0; }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto 60px; /* Adjusted margin to reduce space */
+            padding: 20px;
+        }
+
+        /* StudentGo Section */
+        .container--0- {
+            text-align: center;
+            padding: 30px;
+            background: #f8d7da;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px; /* Reduced space between this and the next section */
+            border: 2px solid black;
+            margin-top: 30px; /* Increased space before StudentGo */
+        }
+
+        /* Updated StudentGo heading */
+        .text-1-2-0 {
+            font-size: 32px;
+            font-weight: bold;
+            color: black;
+            margin-top: 20px; /* Added space before StudentGo */
+        }
+        
+        .text-1-2-1 {
+            font-size: 16px;
+            color: gray;
+            margin-top: -10px; /* Moves it closer to StudentGo */
+        }
+
+        .container-0-1-1 {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* Updated button styles */
+        .container-1-2-0, .container-1-2-1 {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: 1px solid black;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .container-1-2-0 {
+            background: white;
+            color: black;
+        }
+        .container-1-2-1 {
+            background: black;
+            color: white;
+        }
+
+        .container-1-2-0:hover {
+            background: black;
+            color: white;
+        }
+        .container-1-2-1:hover {
+            background: white;
+            color: black;
+        }
+
+        .box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid black;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: gray;
+            margin-bottom: 15px;
+        }
+
+        .deadlines {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .deadline {
+            display: flex;
+            align-items: center;
+            background: white !important;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid black;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .deadline img {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+
+        .deadline:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .deadline-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .deadline-text .title {
+            font-weight: bold;
+        }
+
+        .deadline-text .date {
+            color: gray;
+        }
+
+        /* NEW ANNOUNCEMENT STYLES */
+        .announcements {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .announcement-cards {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px 0;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            width: 200px;
+            flex-shrink: 0;
+            border: 1px solid black;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        
+        .card:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card h3 {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .card p {
+            font-size: 12px;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+
+<header></header>
+
+<div class="container--0-">
+    <h1 class="text-1-2-0">StudentGo</h1>
+    <div class="text-1-2-1">Wherever, Whenever</div>
+    <div class="container-0-1-1">
+        <div class="container-1-2-0">Courses</div>
+        <div class="container-1-2-1">Activities</div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="box">
+        <div class="section-title">Deadlines</div>
+        <div class="subtitle">Upcoming requirements to finish</div>
+        <div class="deadlines">
+            <div class="deadline">
+                <img src="PFPicon.png" alt="Icon">
+                <div class="deadline-text">
+                    <div class="title">CSS151: Software Engineering 1</div>
+                    <div class="date">January 31, 2025</div>
+                </div>
+            </div>
+            <div class="deadline">
+                <img src="PFPicon.png" alt="Icon">
+                <div class="deadline-text">
+                    <div class="title">CSS151L: Software Engineering 1 Lab</div>
+                    <div class="date">February 5, 2025</div>
+                </div>
+            </div>
+            <div class="deadline">
+                <img src="PFPicon.png" alt="Icon">
+                <div class="deadline-text">
+                    <div class="title">CSS133: Algorithms and Complexity</div>
+                    <div class="date">February 3, 2025</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="box">
+        <div class="section-title">Announcements</div>
+        <div class="subtitle">Hear the latest news from your professors</div>
+        <div class="announcements">
+            <div class="announcement-cards">
+                <div class="card">
+                    <h3>Asynchronous Classes for all sections I am handling today.</h3>
+                    <p>Reynalda Layno<br>CSS132</p>
+                </div>
+                <div class="card">
+                    <h3>All activities have been posted for this week, please review.</h3>
+                    <p>Vance Castro<br>ITS162L</p>
+                </div>
+                <div class="card">
+                    <h3>Final Exam is moved to Feb. 3, 2025. Please study.</h3>
+                    <p>Joel De Goma<br>CSS133</p>
+                </div>
+                <div class="card">
+                    <h3>Physics Olympian is now open for registration, join now!</h3>
+                    <p>Liza Dalluz<br>PHYS10 2-8</p>
+                </div>
+                <div class="card">
+                    <h3>Quiz #1 on Thursday!!!</h3>
+                    <p>Angel Ramoso<br>PHYS102 -8L</p>
+                </div>
+                <div class="card">
+                    <h3>First to pass FA2.1 receives 100.</h3>
+                    <p>Leopoldo Gabriel<br>ITS112L</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>StudentGo © 2025</footer>
+
+</body>
+</html>
