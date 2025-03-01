@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background-color: #C0000D;
+            height: 70px;  /* Changed from 91px to 70px */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 32px;
+        }
+
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-container input {
+            padding: 8px 16px;  /* Slightly reduced padding from 10px to 8px */
+            border-radius: 8px;
+            border: none;
+            width: 280px;
+            font-size: 14px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            color: white;
+        }
+
+        .profile-circle {
+            width: 32px;
+            height: 32px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1E1E1E;
+            font-weight: 500;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+        }
+
+        .sidebar {
+            width: 285px;
+            border-right: 1px solid #E5E7EB;
+            padding: 24px;
+        }
+
+        .source-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+
+        .source-item:hover {
+            background-color: #F3F4F6;
+        }
+
+        .source-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .source-name {
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .shortcut {
+            font-size: 12px;
+            color: #6B7280;
+        }
+
+        .source-desc {
+            font-size: 13px;
+            color: #6B7280;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 32px;
+        }
+
+        .announcement {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .announcement h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .announcement p {
+            color: #4B5563;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .view-more {
+            color: #2563EB;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .view-more:hover {
+            color: #1D4ED8;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 32px;
+        }
+
+        .pagination button {
+            padding: 8px 12px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+
+        .pagination button:hover {
+            background-color: #F3F4F6;
+        }
+
+        .pagination button.active {
+            background-color: #E5E7EB;
+        }
+
+        .right-sidebar {
+            width: 200px;
+            border-left: 1px solid #E5E7EB;
+            padding: 24px;
+        }
+
+        .course-item {
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+
+        .course-item:hover {
+            background-color: #F3F4F6;
+        }
+
+        .bottom-bar {
+            height: 100px;  /* Changed from 141px to 100px */
+            background-color: #F7DADA;
+            border-top: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="search-container">
+            <input type="text" placeholder="Search">
+        </div>
+        <div class="header-right">
+            <span>🏠</span>
+            <span>🔔</span>
+            <div class="profile-circle">G</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <h2 style="margin-bottom: 16px;">Announcement Sources</h2>
+            <div class="source-item">
+                <span>★</span>
+                <div class="source-info">
+                    <div class="source-name">
+                        Blackboard
+                        <span class="shortcut">⇧A</span>
+                    </div>
+                    <div class="source-desc">University Platform</div>
+                </div>
+            </div>
+            <div class="source-item">
+                <span>★</span>
+                <div class="source-info">
+                    <div class="source-name">
+                        Discord
+                        <span class="shortcut">⇧A</span>
+                    </div>
+                    <div class="source-desc">Social Platform</div>
+                </div>
+            </div>
+            <div class="source-item">
+                <span>★</span>
+                <div class="source-info">
+                    <div class="source-name">
+                        Messenger
+                        <span class="shortcut">⇧A</span>
+                    </div>
+                    <div class="source-desc">Find your course GC</div>
+                </div>
+            </div>
+            <div class="source-item">
+                <span>★</span>
+                <div class="source-info">
+                    <div class="source-name">
+                        Outlook
+                        <span class="shortcut">⇧A</span>
+                    </div>
+                    <div class="source-desc">University Email</div>
+                </div>
+            </div>
+            <div class="source-item">
+                <span>★</span>
+                <div class="source-info">
+                    <div class="source-name">
+                        MS Teams
+                        <span class="shortcut">⇧A</span>
+                    </div>
+                    <div class="source-desc">University Social Platform</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <h1 style="font-size: 24px; margin-bottom: 8px;">Announcement Main</h1>
+            <p style="color: #6B7280; margin-bottom: 24px;">Recently Added</p>
+
+            <div class="announcement">
+                <h3>100th Year! Centennial Week.</h3>
+                <p>To Mapua University students, due to the celebration of 100 years of education and success, classes on January 20 - 25 will all be held asynchronously.</p>
+                <button class="view-more">View More</button>
+            </div>
+
+            <div class="announcement">
+                <h3>CSS151: Final Project</h3>
+                <p>All or nothing final project and presentation. Please proceed to room 606 according to your group time frame to present your final project to the panelists.</p>
+                <button class="view-more">View More</button>
+            </div>
+
+            <div class="pagination">
+                <button>← Previous</button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>...</button>
+                <button>67</button>
+                <button>68</button>
+                <button>Next →</button>
+            </div>
+        </div>
+
+        <div class="right-sidebar">
+            <div class="course-item">CSS124L</div>
+            <div class="course-item">CSS151L</div>
+            <div class="course-item">ITS161L</div>
+            <div class="course-item">ITS162L</div>
+            <div class="course-item">ITS111L</div>
+            <div class="course-item">ITS112L</div>
+            <div class="course-item">PHYS102-8L</div>
+            <div class="course-item">GED105</div>
+            <div class="course-item">GED106</div>
+            <div class="course-item">GED107</div>
+            <div class="course-item">GED109</div>
+            <div class="course-item">PATHFIT-1</div>
+        </div>
+    </div>
+
+    <div class="bottom-bar"></div>
+</body>
+</html>
