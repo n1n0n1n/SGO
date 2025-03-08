@@ -25,7 +25,7 @@
             width: 100%;
             height: 100%;
             background: url('MUbackground.jpg') no-repeat center center/cover;
-            z-index: -2; /* Pushes background to the lowest layer */
+            z-index: -2;
         }
 
         /* Blur Effect Overlay */
@@ -48,12 +48,8 @@
             position: absolute;
             z-index: 2;
         }
-        header {
-            top: 0;
-        }
-        footer {
-            bottom: 0;
-        }
+        header { top: 0; }
+        footer { bottom: 0; }
 
         /* Main Container */
         .container--0- {
@@ -90,13 +86,9 @@
 
         .text-4-5-0 {
             font-size: 14px;
-            text-align: left;
             color: #000000;
             cursor: pointer;
-        }
-
-        .text-4-5-0:hover {
-            text-decoration: none;
+            text-align: left;
         }
 
         .text-4-5-0 a {
@@ -108,7 +100,11 @@
             text-decoration: none; /* Add underline on hover */
         }
 
-        /* Input Fields */  
+        .text-4-5-0:hover {
+            text-decoration: underline;
+        }
+
+        /* Input Fields */
         .container-4-5-2 {
             background: #eee;
             padding: 8px;
@@ -127,7 +123,7 @@
             padding: 5px;
             font-size: 14px;
             color: #000000;
-            outline: black;
+            outline: none;
         }
 
         /* Sign Up Button */
@@ -147,6 +143,8 @@
 
         .container-3-4-3 {
             margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
         }
     </style>
 </head>
@@ -170,26 +168,21 @@
                 <div class="container-3-4-0">
                     <div class="text-4-5-0">Email</div>
                     <div class="container-4-5-2">
-                        <input type="email" name="email" placeholder="Enter your email here">
+                        <input type="email" placeholder="Enter your email here">
                     </div>
                 </div>
                 <div class="container-3-4-1">
                     <div class="text-4-5-0">Password</div>
                     <div class="container-4-5-2">
-                        <input type="password" name="password" placeholder="Enter your password here">
-                    </div>
-                </div>
-                <div class="container-3-4-1">
-                    <div class="text-4-5-0">Confirm password</div>
-                    <div class="container-4-5-2">
-                        <input type="password" placeholder="Re-enter your password">
+                        <input type="password" placeholder="Enter your password here">
                     </div>
                 </div>
                 <div class="container-3-4-2">
-                    <div class="container-4-5-1">Sign Up</div>
+                    <div class="container-4-5-1">Sign In</div>
                 </div>
                 <div class="container-3-4-3">
-                    <div class="text-4-5-0"><a href="Sign-in Page.html">Have an account? Sign in here.</a></div>
+                    <div class="text-4-5-0">Forgot password?</div>
+                    <div class="text-4-5-0"><a href="Sign-up Page.html">Sign Up</a></div>
                 </div>
             </div>
         </div>
