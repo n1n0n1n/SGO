@@ -1,11 +1,12 @@
 <?php
+// sign up php
 // Get form data
 if (isset($_POST['email']) && isset($_POST['password'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
     // Create connection
-    $conn = mysqli_connect('localhost', 'root', '', 'demo');
+    $conn = mysqli_connect('sql306.infinityfree.com', 'if0_38391513', 'tpftcimd', 'if0_38391513_demo');
 
     // Check connection
     if ($conn->connect_error) {
@@ -32,7 +33,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         if ($stmt->execute()) {
             echo "<script>
                     alert('Account created successfully');
-                    window.location.href = 'Sign-in Page.html';
+                    window.location.href = 'Sign-In-Page.html';
                   </script>";
             exit();
         } else {
