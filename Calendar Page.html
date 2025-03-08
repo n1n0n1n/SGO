@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentGo: Calendar</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            width: 100%;    
+            background: #f0f0f0;
+        }
+
+        header, footer {
+            width: 100%;
+            height: 60px;
+            background-color: rgb(192, 0, 13);
+            position: fixed;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 18px;
+            border: 2px solid black;
+            box-sizing: border-box;
+        }
+        header { 
+            top: 0; 
+            padding: 0 20px;
+            justify-content: space-between;
+        }
+        footer {
+            width: 100%;
+            height: 50px;
+            background-color: rgb(192, 0, 13);
+            position: fixed;
+            bottom: 0;
+            justify-content: center;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 18px;
+            border-top: 2px solid black;
+            box-sizing: border-box;
+        }
+
+        /* Header navigation styles */
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .bird-icon {
+            height: 40px;
+            width: auto;
+            cursor: pointer;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-right: 20px;
+        }
+
+        .nav-icon {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .nav-item {
+            cursor: pointer;
+            padding: 0 10px;
+            font-weight: normal;
+        }
+
+        .profile-icon {
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            border: 1px solid white;
+        }
+
+        .icon-svg {
+            fill: white;
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            padding: 20px;
+        }
+
+        /* Main content styles for the combined code */
+        .content-wrapper {
+            display: flex;
+            margin-top: 70px; /* Space for the header */
+            margin-bottom: 60px; /* Space for the footer */
+            padding: 20px;
+        }
+
+        .main-content {
+            flex: 2;
+            margin: 0 20px;
+        }
+
+        .right-sidebar {
+            flex: 1;
+            background-color: #f8f0ff;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            max-width: 300px;
+            max-height: 600px; /* Fixed height for scrollable content */
+            overflow: hidden; /* Hide overflow */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Make the activities list scrollable */
+        .activities-container {
+            overflow-y: auto; /* Add vertical scrollbar when needed */
+            max-height: 480px; /* Set maximum height - adjusted to make room for form */
+            padding-right: 10px; /* Add padding for scrollbar */
+        }
+
+        /* Calendar styles */
+        .container--0- {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        /* Month header styles */
+        .container-1-2-0 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .container-2-3-0, .container-2-3-1 {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .text-3-4-0 {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        /* Weekday header */
+        .container-1-2-1 {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #666;
+        }
+
+        /* Days grid */
+        .container-1-2-2 {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container-2-3-0, .container-2-3-1, .container-2-3-2, 
+        .container-2-3-3, .container-2-3-4 {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-gap: 2px;
+            margin-bottom: 2px;
+        }
+
+        .container-3-4-0, .container-3-4-1, .container-3-4-2, 
+        .container-3-4-3, .container-3-4-4, .container-3-4-5, .container-3-4-6 {
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .calendar-day {
+            height: 40px;
+            width: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .calendar-day:hover {
+            background-color: #f0f0f0;
+        }
+
+        .calendar-day.today {
+            font-weight: bold;
+            color: #007AFF;
+            border: 1px solid #007AFF;
+        }
+
+        .calendar-day.selected {
+            background-color: #007AFF;
+            color: white;
+        }
+
+        .calendar-day.other-month {
+            color: #ccc;
+        }
+
+        /* Activity list in right sidebar - UPDATED */
+        .activity-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f0f0ff;
+            border-radius: 5px;
+            border-left: 3px solid #65558F;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .activity-content {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .activity-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .activity-checkbox {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+            accent-color: #65558F;
+        }
+
+        /* For better UI with larger checkboxes */
+        input[type="checkbox"].activity-checkbox {
+            transform: scale(1.5);
+            margin-right: 15px;
+        }
+
+        /* Delete button */
+        .delete-btn {
+            background-color: #ff4d4f;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 10px;
+        }
+
+        .delete-btn:hover {
+            background-color: #ff7875;
+        }
+
+        /* Add activity form */
+        .add-activity-form {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+        }
+
+        .add-activity-form input[type="text"] {
+            width: 70%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+
+        .add-activity-form button {
+            padding: 8px 12px;
+            background-color: #65558F;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .add-activity-form button:hover {
+            background-color: #534879;
+        }
+
+        .form-row {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        /* Ends time section */
+        .container-0-1-1 .text-1-2-0 {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .container-0-1-1 .container-1-2-1 {
+            display: flex;
+        }
+
+        .container-0-1-1 .container-2-3-0 .text-3-4-0 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<!--start of menu bar-->
+<header>
+    <div class="header-left">
+        <a href="Main Page.html"><img src="BIRDicon.png" alt="Bird Icon" class="bird-icon"></a>
+    </div>
+
+    <a href="Calendar Page.html">
+    <div class="header-right">
+        <div class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" fill="white" viewBox="0 0 16 16">
+                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+            </svg>
+        </div>
+        </a>
+
+        <a href="Announcement Page.html">
+        <div class="nav-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" fill="white" viewBox="0 0 16 16">
+                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
+            </svg>
+        </div>
+        </a>
+
+        <a href="Services.html" style="text-decoration: none; color: inherit;">
+        <div class="nav-item">Services</div>
+        </a>
+        <div class="nav-item">Organizations</div>
+        <div class="nav-item">Contact</div>
+        <img src="PFPicon.png" alt="Profile Icon" class="profile-icon">
+    </div>
+</header>
+<!--end of menu bar-->
+
+<!--start of content-->
+<div class="content-wrapper">
+    <!-- Main Calendar Section -->
+    <div class="main-content">
+        <div class="container--0-">
+            <div class="container-0-1-0" id="calendar-container">
+                <!-- Calendar will be dynamically generated here -->
+            </div>
+            <div class="container-0-1-1">
+                <div class="text-1-2-0">Ends</div>
+                <div class="container-1-2-1">
+                    <div class="container-2-3-0"><div class="text-3-4-0">8:00 AM</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Activity List Right Sidebar - UPDATED with Add/Delete functionality -->
+    <div class="right-sidebar">
+        <h3>Activities</h3>
+        <div class="activities-container" id="activities-list">
+            <!-- Activities will be dynamically generated here -->
+        </div>
+        
+        <!-- Add Activity Form -->
+        <div class="add-activity-form">
+            <div class="form-row">
+                <input type="text" id="new-activity" placeholder="Enter new activity...">
+                <button id="add-activity-btn">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end of content-->
+
+<footer>StudentGo © 2025</footer>
+
+<script>
+    // Calendar functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get the current date
+        const today = new Date();
+        let currentMonth = today.getMonth();
+        let currentYear = today.getFullYear();
+        
+        // Generate and render the calendar
+        generateCalendar(currentMonth, currentYear);
+        
+        // Function to generate calendar
+        function generateCalendar(month, year) {
+            const calendarContainer = document.getElementById('calendar-container');
+            
+            // Create month navigation
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                              "July", "August", "September", "October", "November", "December"];
+            
+            // Create month header
+            let calendarHTML = `
+                <div class="container-1-2-0">
+                    <div class="container-2-3-0" onclick="previousMonth()">
+                        <div class="text-3-4-0">←</div>
+                    </div>
+                    <div class="container-2-3-1">
+                        <div class="text-3-4-0">${monthNames[month]} ${year}</div>
+                        <div class="text-3-4-1" onclick="nextMonth()">→</div>
+                    </div>
+                </div>
+            `;
+            
+            // Add weekday headers
+            calendarHTML += `
+                <div class="container-1-2-1">
+                    <div class="text-2-3-0">Sun</div>
+                    <div class="text-2-3-1">Mon</div>
+                    <div class="text-2-3-2">Tue</div>
+                    <div class="text-2-3-3">Wed</div>
+                    <div class="text-2-3-4">Thu</div>
+                    <div class="text-2-3-5">Fri</div>
+                    <div class="text-2-3-6">Sat</div>
+                </div>
+            `;
+            
+            // Get first day of month
+            const firstDay = new Date(year, month, 1);
+            const startingDay = firstDay.getDay(); // 0 = Sunday, 1 = Monday, etc.
+            
+            // Get last day of month
+            const lastDay = new Date(year, month + 1, 0).getDate();
+            
+            // Get last day of previous month
+            const prevMonthLastDay = new Date(year, month, 0).getDate();
+            
+            // Initialize variables
+            let dayCount = 1;
+            let nextMonthDayCount = 1;
+            
+            // Create calendar grid
+            calendarHTML += '<div class="container-1-2-2">';
+            
+            // Create weeks
+            for (let i = 0; i < 6; i++) {
+                // Only render the 6th row if needed
+                if (i === 5 && dayCount > lastDay) continue;
+                
+                calendarHTML += `<div class="container-2-3-${i}">`;
+                
+                // Create days
+                for (let j = 0; j < 7; j++) {
+                    if (i === 0 && j < startingDay) {
+                        // Previous month days
+                        const prevMonthDay = prevMonthLastDay - startingDay + j + 1;
+                        calendarHTML += `
+                            <div class="calendar-day other-month" data-date="${year}-${month === 0 ? 12 : month}-${prevMonthDay}">
+                                ${prevMonthDay}
+                            </div>
+                        `;
+                    } else if (dayCount > lastDay) {
+                        // Next month days
+                        calendarHTML += `
+                            <div class="calendar-day other-month" data-date="${year}-${month === 11 ? 1 : month + 2}-${nextMonthDayCount}">
+                                ${nextMonthDayCount}
+                            </div>
+                        `;
+                        nextMonthDayCount++;
+                    } else {
+                        // Current month days
+                        let classes = "calendar-day";
+                        if (dayCount === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+                            classes += " today";
+                        }
+                        
+                        calendarHTML += `
+                            <div class="${classes}" data-date="${year}-${month + 1}-${dayCount}" onclick="selectDate(this)">
+                                ${dayCount}
+                            </div>
+                        `;
+                        dayCount++;
+                    }
+                }
+                
+                calendarHTML += `</div>`;
+            }
+            
+            calendarHTML += '</div>';
+            
+            // Set the HTML
+            calendarContainer.innerHTML = calendarHTML;
+        }
+        
+        // Function to navigate to previous month
+        window.previousMonth = function() {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            generateCalendar(currentMonth, currentYear);
+        };
+        
+        // Function to navigate to next month
+        window.nextMonth = function() {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            generateCalendar(currentMonth, currentYear);
+        };
+        
+        // Function to select a date
+        window.selectDate = function(element) {
+            // Remove selected class from all days
+            document.querySelectorAll('.calendar-day').forEach(day => {
+                day.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked day
+            element.classList.add('selected');
+            
+            // You can add more functionality here based on the selected date
+            console.log('Selected date:', element.getAttribute('data-date'));
+        };
+
+        // Activities Management - New Code
+        
+        // Sample initial activities (can be replaced with localStorage or database)
+        let activities = [
+            { id: 1, text: "Activity #1", completed: false },
+            { id: 2, text: "Activity #2", completed: false },
+            { id: 3, text: "Activity #3", completed: false },
+            { id: 4, text: "Activity #4", completed: false },
+            { id: 5, text: "Activity #5", completed: false },
+            { id: 6, text: "Activity #6", completed: false }
+        ];
+        
+        // Function to render activities
+        function renderActivities() {
+            const activitiesList = document.getElementById('activities-list');
+            activitiesList.innerHTML = '';
+            
+            activities.forEach(activity => {
+                const activityItem = document.createElement('div');
+                activityItem.className = 'activity-item';
+                activityItem.innerHTML = `
+                    <div class="activity-content">
+                        <label class="activity-label">
+                            <input type="checkbox" class="activity-checkbox" ${activity.completed ? 'checked' : ''} 
+                                onchange="toggleActivity(${activity.id})">
+                            <span style="${activity.completed ? 'text-decoration: line-through; color: #888;' : ''}">${activity.text}</span>
+                        </label>
+                    </div>
+                    <button class="delete-btn" onclick="deleteActivity(${activity.id})">×</button>
+                `;
+                activitiesList.appendChild(activityItem);
+            });
+        }
+        
+        // Function to toggle activity completion
+        window.toggleActivity = function(id) {
+            const activity = activities.find(a => a.id === id);
+            if (activity) {
+                activity.completed = !activity.completed;
+                renderActivities();
+            }
+        };
+        
+        // Function to delete activity
+        window.deleteActivity = function(id) {
+            activities = activities.filter(a => a.id !== id);
+            renderActivities();
+        };
+        
+        // Function to add new activity
+        function addActivity() {
+            const input = document.getElementById('new-activity');
+            const text = input.value.trim();
+            
+            if (text) {
+                // Find the highest ID and increment by 1
+                const maxId = activities.length > 0 ? Math.max(...activities.map(a => a.id)) : 0;
+                
+                activities.push({
+                    id: maxId + 1,
+                    text: text,
+                    completed: false
+                });
+                
+                input.value = '';
+                renderActivities();
+            }
+        }
+        
+        // Add event listener for the add button
+        document.getElementById('add-activity-btn').addEventListener('click', addActivity);
+        
+        // Add event listener for Enter key in input field
+        document.getElementById('new-activity').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addActivity();
+            }
+        });
+        
+        // Initial render
+        renderActivities();
+    });
+</script>
+
+</body>
+</html>
