@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!--calendar page updated 0.2-->
+<!--calendar page updated 0.3-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -126,8 +126,8 @@
             flex-direction: column;
         }
 
-        /* Make the activities list scrollable */
-        .activities-container {
+        /* Make the tasks list scrollable */
+        .tasks-container {
             overflow-y: auto; /* Add vertical scrollbar when needed */
             max-height: 480px; /* Set maximum height - adjusted to make room for form */
             padding-right: 10px; /* Add padding for scrollbar */
@@ -185,16 +185,15 @@
             grid-template-columns: repeat(7, 1fr);
             grid-gap: 2px;
             margin-bottom: 2px;
+            text-align: center; /* Center the content of each grid cell */
         }
 
         .container-3-4-0, .container-3-4-1, .container-3-4-2, 
         .container-3-4-3, .container-3-4-4, .container-3-4-5, .container-3-4-6 {
-            height: 40px;
             display: flex;
             justify-content: center;
             align-items: center;
-            border-radius: 50%;
-            cursor: pointer;
+            height: 40px;
         }
 
         .calendar-day {
@@ -205,6 +204,8 @@
             align-items: center;
             border-radius: 50%;
             cursor: pointer;
+            margin: 0 auto; /* Center horizontally within the grid cell */
+            text-align: center; /* Center the text */
         }
 
         .calendar-day:hover {
@@ -226,8 +227,8 @@
             color: #ccc;
         }
 
-        /* Activity list in right sidebar - UPDATED */
-        .activity-item {
+        /* Task list in right sidebar - UPDATED */
+        .task-item {
             margin-bottom: 10px;
             padding: 10px;
             background-color: #f0f0ff;
@@ -238,19 +239,19 @@
             align-items: center;
         }
 
-        .activity-content {
+        .task-content {
             display: flex;
             align-items: center;
             flex-grow: 1;
         }
 
-        .activity-label {
+        .task-label {
             display: flex;
             align-items: center;
             cursor: pointer;
         }
 
-        .activity-checkbox {
+        .task-checkbox {
             margin-right: 10px;
             width: 20px;
             height: 20px;
@@ -258,7 +259,7 @@
         }
 
         /* For better UI with larger checkboxes */
-        input[type="checkbox"].activity-checkbox {
+        input[type="checkbox"].task-checkbox {
             transform: scale(1.5);
             margin-right: 15px;
         }
@@ -283,14 +284,14 @@
             background-color: #ff7875;
         }
 
-        /* Add activity form */
-        .add-activity-form {
+        /* Add task form */
+        .add-task-form {
             margin-top: 15px;
             padding-top: 15px;
             border-top: 1px solid #ddd;
         }
 
-        .add-activity-form input[type="text"] {
+        .add-task-form input[type="text"] {
             width: 70%;
             padding: 8px;
             border: 1px solid #ddd;
@@ -298,7 +299,7 @@
             margin-right: 5px;
         }
 
-        .add-activity-form button {
+        .add-task-form button {
             padding: 8px 12px;
             background-color: #65558F;
             color: white;
@@ -307,7 +308,7 @@
             cursor: pointer;
         }
 
-        .add-activity-form button:hover {
+        .add-task-form button:hover {
             background-color: #534879;
         }
 
@@ -348,7 +349,7 @@
         </div>
         </a>
 
-        <a href="Announcement Page.html">
+        <a href="Announcement-Page.html">
         <div class="nav-icon">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" fill="white" viewBox="0 0 16 16">
                 <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
@@ -378,27 +379,34 @@
             <div class="container-0-1-0" id="calendar-container">
                 <!-- Calendar will be dynamically generated here -->
             </div>
+            <!-- fluff
             <div class="container-0-1-1">
                 <div class="text-1-2-0">Ends</div>
                 <div class="container-1-2-1">
                     <div class="container-2-3-0"><div class="text-3-4-0">8:00 AM</div></div>
                 </div>
             </div>
+            -->
         </div>
     </div>
 
-    <!-- Activity List Right Sidebar - UPDATED with Add/Delete functionality -->
+    <!-- task List Right Sidebar - UPDATED with Add/Delete functionality -->
     <div class="right-sidebar">
-        <h3>Activities</h3>
-        <div class="activities-container" id="activities-list">
-            <!-- Activities will be dynamically generated here -->
+        <h3>Tasks</h3>
+        <div class="tasks-container" id="tasks-list">
+            <!-- tasks will be dynamically generated here -->
         </div>
         
-        <!-- Add Activity Form -->
-        <div class="add-activity-form">
+        <!-- Add task Form -->
+        <div class="add-task-form">
             <div class="form-row">
-                <input type="text" id="new-activity" placeholder="Enter new activity...">
-                <button id="add-activity-btn">Add</button>
+                <input type="text" id="new-task" placeholder="Enter new task...">
+                <div class="form-row">
+                    <input type="date" id="task-date">
+                </div>
+                <div class="form-row">
+                <button id="add-task-btn">Add</button>
+                </div> 
             </div>
         </div>
     </div>
@@ -408,7 +416,6 @@
 <footer>StudentGo © 2025</footer>
 
 <script>
-    // Calendar functionality
     document.addEventListener('DOMContentLoaded', function() {
         // Get the current date
         const today = new Date();
@@ -424,7 +431,7 @@
             
             // Create month navigation
             const monthNames = ["January", "February", "March", "April", "May", "June",
-                              "July", "August", "September", "October", "November", "December"];
+                            "July", "August", "September", "October", "November", "December"];
             
             // Create month header
             let calendarHTML = `
@@ -469,11 +476,12 @@
             // Create calendar grid
             calendarHTML += '<div class="container-1-2-2">';
             
-            // Create weeks
-            for (let i = 0; i < 6; i++) {
-                // Only render the 6th row if needed
-                if (i === 5 && dayCount > lastDay) continue;
-                
+            // Calculate number of rows needed
+            const totalDaysToShow = startingDay + lastDay;
+            const rowsNeeded = Math.ceil(totalDaysToShow / 7);
+            
+            // Create weeks (only as many as needed)
+            for (let i = 0; i < rowsNeeded; i++) {
                 calendarHTML += `<div class="container-2-3-${i}">`;
                 
                 // Create days
@@ -553,87 +561,87 @@
             console.log('Selected date:', element.getAttribute('data-date'));
         };
 
-        // Activities Management - New Code
+
+        // tasks Management - New Code
         
-        // Sample initial activities (can be replaced with localStorage or database)
-        let activities = [
-            { id: 1, text: "Activity #1", completed: false },
-            { id: 2, text: "Activity #2", completed: false },
-            { id: 3, text: "Activity #3", completed: false },
-            { id: 4, text: "Activity #4", completed: false },
-            { id: 5, text: "Activity #5", completed: false },
-            { id: 6, text: "Activity #6", completed: false }
-        ];
+        // Initialize tasks as an empty array
+        let tasks = [];
         
-        // Function to render activities
-        function renderActivities() {
-            const activitiesList = document.getElementById('activities-list');
-            activitiesList.innerHTML = '';
+        // Function to render tasks
+        function renderTasks() {
+            const tasksList = document.getElementById('tasks-list');
+            tasksList.innerHTML = '';
             
-            activities.forEach(activity => {
-                const activityItem = document.createElement('div');
-                activityItem.className = 'activity-item';
-                activityItem.innerHTML = `
-                    <div class="activity-content">
-                        <label class="activity-label">
-                            <input type="checkbox" class="activity-checkbox" ${activity.completed ? 'checked' : ''} 
-                                onchange="toggleActivity(${activity.id})">
-                            <span style="${activity.completed ? 'text-decoration: line-through; color: #888;' : ''}">${activity.text}</span>
+            tasks.forEach(task => {
+                const taskItem = document.createElement('div');
+                taskItem.className = 'task-item';
+                taskItem.innerHTML = `
+                    <div class="task-content">
+                        <label class="task-label">
+                            <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''} 
+                                onchange="toggletask(${task.id})">
+                            <span style="${task.completed ? 'text-decoration: line-through; color: #888;' : ''}">
+                                ${task.text} - ${task.date}
+                            </span>
                         </label>
                     </div>
-                    <button class="delete-btn" onclick="deleteActivity(${activity.id})">×</button>
+                    <button class="delete-btn" onclick="deletetask(${task.id})">×</button>
                 `;
-                activitiesList.appendChild(activityItem);
+                tasksList.appendChild(taskItem);
             });
         }
         
-        // Function to toggle activity completion
-        window.toggleActivity = function(id) {
-            const activity = activities.find(a => a.id === id);
-            if (activity) {
-                activity.completed = !activity.completed;
-                renderActivities();
+        // Function to toggle task completion
+        window.toggletask = function(id) {
+            const task = tasks.find(a => a.id === id);
+            if (task) {
+                task.completed = !task.completed;
+                renderTasks();
             }
         };
         
-        // Function to delete activity
-        window.deleteActivity = function(id) {
-            activities = activities.filter(a => a.id !== id);
-            renderActivities();
+        // Function to delete task
+        window.deletetask = function(id) {
+            tasks = tasks.filter(a => a.id !== id);
+            renderTasks();
         };
         
-        // Function to add new activity
-        function addActivity() {
-            const input = document.getElementById('new-activity');
+        // Function to add new task
+        function addtask() {
+            const input = document.getElementById('new-task');
+            const dateInput = document.getElementById('task-date');
             const text = input.value.trim();
+            const date = dateInput.value;
             
-            if (text) {
+            if (text && date) {
                 // Find the highest ID and increment by 1
-                const maxId = activities.length > 0 ? Math.max(...activities.map(a => a.id)) : 0;
+                const maxId = tasks.length > 0 ? Math.max(...tasks.map(a => a.id)) : 0;
                 
-                activities.push({
+                tasks.push({
                     id: maxId + 1,
                     text: text,
+                    date: date,
                     completed: false
                 });
                 
                 input.value = '';
-                renderActivities();
+                dateInput.value = '';
+                renderTasks();
             }
         }
         
         // Add event listener for the add button
-        document.getElementById('add-activity-btn').addEventListener('click', addActivity);
+        document.getElementById('add-task-btn').addEventListener('click', addtask);
         
         // Add event listener for Enter key in input field
-        document.getElementById('new-activity').addEventListener('keypress', function(e) {
+        document.getElementById('new-task').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                addActivity();
+                addtask();
             }
         });
         
         // Initial render
-        renderActivities();
+        renderTasks();
     });
 </script>
 
