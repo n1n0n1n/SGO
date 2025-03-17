@@ -19,6 +19,10 @@ http://testsubjectsoen.infinityfreeapp.com/test2/Sign-Up-Page.html
 
 
 
+How to set up and run your own hosted website
+
+https://github.com/n1n0n1n/SGO/blob/Live-Server-Files/Hosting-Serving-Guide.jpg
+
 
 SGO custom
 
