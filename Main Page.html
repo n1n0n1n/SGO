@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+<!--main page updated 0.3-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudentGo - Main Page</title>
+    <title>StudentGo: Whenever, Wherever</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,10 +13,21 @@
             background: #f0f0f0;
         }
 
+        /* Background Image Layer */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('http://testsubjectsoen.infinityfreeapp.com/images/MUbackground.jpg') no-repeat center center/cover;
+            z-index: -2; /* Pushes background to the lowest layer */
+        }
+
         header, footer {
             width: 100%;
             height: 60px; /* Fixed height in pixels instead of percentage */
-            background-color: rgb(192, 0, 13);
+            background-color: rgb(164, 11, 17);
             position: fixed;
             z-index: 2;
             display: flex;
@@ -87,6 +99,121 @@
             margin: 0 auto 60px;
             padding: 20px;
         }
+
+        /*Search Bar Style*/
+        .search-container {
+        display: flex;
+        align-items: center;
+        margin-left: 5px;
+        height: 30px;
+        }
+        
+        .search-input {
+            height: 100%;
+            width: 200px;
+            border: none;
+            border-radius: 15px 0 0 15px;
+            padding: 0 10px;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        .search-button {
+            height: 100%;
+            width: 35px;
+            background-color: white;
+            border: none;
+            border-radius: 0 15px 15px 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .search-button svg {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .search-button:hover {
+            background-color: #f0f0f0;
+        }
+        
+        /* Adjust header-left to accommodate the search bar with minimal gap */
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Search results styling */
+        .search-results {
+            position: absolute;
+            top: 60px;
+            left: 65px;
+            width: 235px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .search-results.active {
+            display: block;
+        }
+        
+        .result-item {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+        
+        .result-item:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .result-title {
+            font-weight: bold;
+            font-size: 14px;
+            color: #262626;
+        }
+        
+        .result-description {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .no-results {
+            padding: 15px;
+            text-align: center;
+            color: #666;
+        }
+
+        /* Style for the selected search result item */
+        .result-item.selected {
+            background-color: #f0f0f0;
+            border-left: 3px solid rgb(192, 0, 13);
+        }
+
+        
+        .search-results {
+            outline: none;
+            position: absolute;
+            top: 60px;
+            left: 65px;
+            width: 235px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+
 
         /* StudentGo Section */
         .container--0- {
@@ -252,25 +379,55 @@
 </head>
 <body>
 
+<!-- Background Image -->
+<div class="background"></div>
+
 <header>
     <div class="header-left">
-        <a href="#"><img src="BIRDicon.png" alt="Bird Icon" class="bird-icon"></a>
+        <a href="http://testsubjectsoen.infinityfreeapp.com/test2/Main-Page.html"><img src="https://cdn-icons-png.flaticon.com/512/641/641975.png" alt="Bird Icon" class="bird-icon"></a>
+        
+        <!-- Functional search bar with dropdown -->
+        <div class="search-container">
+            <input type="text" id="search-input" class="search-input" placeholder="Search...">
+            <button id="search-button" class="search-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+            </button>
+            
+            <!-- Dropdown placed inside the search container for better positioning -->
+            <div id="search-results" class="search-results"></div>
+        </div>
     </div>
+
+
+    <a href="http://testsubjectsoen.infinityfreeapp.com/test2/Calendar-Page.html">
     <div class="header-right">
         <div class="nav-icon">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" fill="white" viewBox="0 0 16 16">
                 <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
             </svg>
         </div>
+        </a>
+
+        <a href="http://testsubjectsoen.infinityfreeapp.com/test2/Announcement-Page.html">
         <div class="nav-icon">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon-svg" fill="white" viewBox="0 0 16 16">
                 <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
             </svg>
-        </div>
+        </div> 
+        </a>
+        
+        <a href="http://testsubjectsoen.infinityfreeapp.com/test2/Services.html" style="text-decoration: none; color: inherit;">
         <div class="nav-item">Services</div>
-        <div class="nav-item">Organizations</div>
+        </a>
+        <a href= "https://www.mapua.edu.ph/pages/about-mapua/the-university/student-organizations" style="text-decoration: none; color: inherit;">
+        <div href="class="nav-item">Organizations</div>
+        </a>
+        <a href= "https://www.mapua.edu.ph/pages/services/directory" style="text-decoration: none; color: inherit;">
         <div class="nav-item">Contact</div>
-        <img src="PFPicon.png" alt="Profile Icon" class="profile-icon">
+        </a>
+        <img src="https://cdn-icons-png.flaticon.com/512/6522/6522516.png" alt="Profile Icon" class="profile-icon">
     </div>
 </header>
 
@@ -285,7 +442,9 @@
 
 <div class="container">
     <div class="box">
+        <a href="http://testsubjectsoen.infinityfreeapp.com/test2/Calendar-Page.html" style="text-decoration: none; color: inherit;">
         <div class="section-title">Deadlines</div>
+        </a>
         <div class="subtitle">Upcoming requirements to finish</div>
         <div class="deadlines">
             <div class="deadline">
@@ -313,7 +472,9 @@
     </div>
     
     <div class="box">
+        <a href="http://testsubjectsoen.infinityfreeapp.com/test2/Announcement-Page.html" style="text-decoration: none; color: inherit;">
         <div class="section-title">Announcements</div>
+        </a>
         <div class="subtitle">Hear the latest news from your professors</div>
         <div class="announcements">
             <div class="announcement-cards">
@@ -347,6 +508,197 @@
 </div>
 
 <footer>StudentGo © 2025</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Define searchable content
+    const searchableContent = [
+        {
+            title: "Calendar",
+            description: "View and manage your schedule",
+            url: "http://testsubjectsoen.infinityfreeapp.com/test2/Calendar-Page.html"
+        },
+        {
+            title: "Announcements",
+            description: "Latest news and updates",
+            url: "http://testsubjectsoen.infinityfreeapp.com/test2/Announcement-Page.html"
+        },
+        {
+            title: "Services",
+            description: "Student services and resources",
+            url: "http://testsubjectsoen.infinityfreeapp.com/test2/Services.html"
+        },
+        {
+            title: "Organizations",
+            description: "Student clubs and groups",
+            url: "https://www.mapua.edu.ph/pages/about-mapua/the-university/student-organizations"
+        },
+        {
+            title: "Contact",
+            description: "Contact directory",
+            url: "https://www.mapua.edu.ph/pages/services/directory"
+        },
+        {
+            title: "CSS151: Software Engineering",
+            description: "Deadline: January 31, 2025",
+            url: "#"
+        },
+        {
+            title: "CSS151L: Software Engineering Lab",
+            description: "Deadline: February 5, 2025",
+            url: "#"
+        },
+        {
+            title: "CSS133: Algorithms and Complexity",
+            description: "Deadline: February 3, 2025",
+            url: "#"
+        }
+    ];
+    
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+    const searchResults = document.getElementById('search-results');
+    
+    let selectedResultIndex = -1; // Track the currently selected result
+
+
+    // Function to perform search
+    function performSearch() {
+        const query = searchInput.value.toLowerCase().trim();
+        
+        // Clear previous results
+        searchResults.innerHTML = '';
+        
+        if (query === '') {
+            searchResults.classList.remove('active');
+            return;
+        }
+        
+        // Filter content based on search query
+        const filteredResults = searchableContent.filter(item => 
+            item.title.toLowerCase().includes(query) || 
+            item.description.toLowerCase().includes(query)
+        );
+        
+         // Display results
+        if (filteredResults.length > 0) {
+            filteredResults.forEach((result, index) => {
+                const resultItem = document.createElement('div');
+                resultItem.className = 'result-item';
+                resultItem.dataset.index = index;
+                resultItem.innerHTML = `
+                    <div class="result-title">${result.title}</div>
+                    <div class="result-description">${result.description}</div>
+                `;
+                resultItem.addEventListener('click', function() {
+                    window.location.href = result.url;
+                });
+                searchResults.appendChild(resultItem);
+            });
+        } else {
+            searchResults.innerHTML = '<div class="no-results">No results found</div>';
+        }
+        
+        searchResults.classList.add('active');
+        return filteredResults;
+    }
+    
+    // Select a result by index
+    function selectResult(index, filteredResults) {
+        // Remove highlighting from all results
+        const allResults = searchResults.querySelectorAll('.result-item');
+        allResults.forEach(item => item.classList.remove('selected'));
+        
+        // Add highlighting to the selected result
+        if (index >= 0 && index < allResults.length) {
+            selectedResultIndex = index;
+            allResults[index].classList.add('selected');
+            allResults[index].scrollIntoView({ block: 'nearest' });
+        }
+    }
+
+    // Navigate to the selected result's URL
+    function navigateToSelectedResult() {
+        const selectedItem = searchResults.querySelector('.result-item.selected');
+        if (selectedItem) {
+            const index = parseInt(selectedItem.dataset.index);
+            const filteredResults = searchableContent.filter(item => 
+                item.title.toLowerCase().includes(searchInput.value.toLowerCase()) || 
+                item.description.toLowerCase().includes(searchInput.value.toLowerCase())
+            );
+            if (filteredResults[index]) {
+                window.location.href = filteredResults[index].url;
+            }
+        } else if (searchResults.querySelector('.result-item')) {
+            // If no item is selected but results exist, select the first one
+            const firstItem = searchResults.querySelector('.result-item');
+            const filteredResults = searchableContent.filter(item => 
+                item.title.toLowerCase().includes(searchInput.value.toLowerCase()) || 
+                item.description.toLowerCase().includes(searchInput.value.toLowerCase())
+            );
+            window.location.href = filteredResults[0].url;
+        }
+    }
+    
+    // Event listeners
+    searchButton.addEventListener('click', performSearch);
+    
+    searchInput.addEventListener('keydown', function(event) {
+        const filteredResults = searchableContent.filter(item => 
+            item.title.toLowerCase().includes(searchInput.value.toLowerCase()) || 
+            item.description.toLowerCase().includes(searchInput.value.toLowerCase())
+        );
+        
+        if (searchResults.classList.contains('active')) {
+            switch(event.key) {
+                case 'Enter':
+                    event.preventDefault();
+                    navigateToSelectedResult();
+                    break;
+                case 'Tab':
+                    event.preventDefault();
+                    // Move to next result, or back to first if at the end
+                    const nextIndex = (selectedResultIndex + 1) % filteredResults.length;
+                    selectResult(nextIndex, filteredResults);
+                    break;
+                case 'ArrowDown':
+                    event.preventDefault();
+                    // Move to next result, or back to first if at the end
+                    const downIndex = (selectedResultIndex + 1) % filteredResults.length;
+                    selectResult(downIndex, filteredResults);
+                    break;
+                case 'ArrowUp':
+                    event.preventDefault();
+                    // Move to previous result, or to last if at the beginning
+                    const upIndex = selectedResultIndex <= 0 ? filteredResults.length - 1 : selectedResultIndex - 1;
+                    selectResult(upIndex, filteredResults);
+                    break;
+                case 'Escape':
+                    searchResults.classList.remove('active');
+                    break;
+            }
+        } else if (event.key === 'Enter') {
+            performSearch();
+        }
+    });
+    
+    // Close search results when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!searchInput.contains(event.target) && !searchButton.contains(event.target) && !searchResults.contains(event.target)) {
+            searchResults.classList.remove('active');
+        }
+    });
+    
+    // Real-time search as user types (optional)
+    searchInput.addEventListener('input', function() {
+        if (this.value.length >= 2) { // Start searching after 2 characters
+            performSearch();
+        } else {
+            searchResults.classList.remove('active');
+        }
+    });
+});
+</script>
 
 </body>
 </html>

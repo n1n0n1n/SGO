@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<!--sign in test page -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentGo Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Background Image Layer */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('http://testsubjectsoen.infinityfreeapp.com/images/MUbackground.jpg') no-repeat center center/cover;
+            z-index: -2; /* Pushes background to the lowest layer */
+        }
+
+        /* Blur Effect Overlay */
+        .blur-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(1px);
+            background: rgba(255, 255, 255, 0.2);
+            z-index: -1;
+        }
+
+        /* Red Header and Footer */
+        header, footer {
+            width: 100%;
+            height: 8%;
+            background-color: rgb(164, 11, 17);
+            position: absolute;
+            z-index: 2;
+        }
+        header { top: 0; }
+        footer { bottom: 0; }
+
+        /* Main Container */
+        .container--0- {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .container-0-1-1 {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 320px;
+            backdrop-filter: blur(10px);
+            border: 1px solid black;
+        }
+
+        .text-2-3-1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 1px;
+        }
+
+        .text-2-3-0 {
+            font-size: 18px;
+            color: #000000;
+            margin-bottom: 25px;
+        }
+
+        .text-4-5-0 {
+            font-size: 14px;
+            color: #000000;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .text-4-5-0 a {
+            color: inherit; /* Inherit color from parent */
+            text-decoration: none; /* Remove underline */
+        }
+
+        .text-4-5-0 a:hover {
+            text-decoration: underline; /* Add underline on hover */
+        }
+
+        .text-4-5-0:hover {
+            text-decoration: underline;
+        }
+
+        /* Input Fields */
+        .container-4-5-2 {
+            background: #eee;
+            padding: 8px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            width: calc(100% - 16px);
+            display: flex;
+            align-items: center;
+            border: 1px solid black;
+        }
+
+        .container-4-5-2 input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            padding: 5px;
+            font-size: 14px;
+            color: #000000;
+            outline: none;
+        }
+
+        /* Sign Up Button */
+        .container-4-5-1 {
+            background: #007bff;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+            width: calc(100% - 20px);
+        }
+
+        .container-4-5-1:hover {
+            background: #0056b3;
+        }
+
+        .container-3-4-3 {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Background Image -->
+<div class="background"></div>
+
+<!-- Blur Overlay -->
+<div class="blur-overlay"></div>
+
+<header></header> <!-- Red Top Bar -->
+
+<!-- Main Content -->
+<div class="container--0-">
+    <div class="container-0-1-1">
+        <div class="container-1-2-1">
+            <div class="text-2-3-1">StudentGo</div>
+            <div class="text-2-3-0">Wherever, Whenever</div>
+            <div class="container-2-3-2">
+                <form action="Sign-In.php" method="POST">
+                    <div class="container-3-4-0">
+                        <div class="text-4-5-0">Email</div>
+                        <div class="container-4-5-2">
+                            <input type="email" name="email" placeholder="Enter your email here" required>
+                        </div>
+                    </div>
+                    <div class="container-3-4-1">
+                        <div class="text-4-5-0">Password</div>
+                        <div class="container-4-5-2">
+                            <input type="password" name="password" placeholder="Enter your password here" required>
+                        </div>
+                    </div>
+                    <div class="container-3-4-2">
+                        <input type="submit" value="Sign In" class="container-4-5-1">
+                    </div>
+                </form>
+                <div class="container-3-4-3">
+                    <div class="text-4-5-0">Forgot password?</div>
+                    <div class="text-4-5-0"><a href="http://testsubjectsoen.infinityfreeapp.com/test2/Sign-Up-Page.html">Sign Up</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer></footer> <!-- Red Bottom Bar -->
+
+</body>
+</html>
