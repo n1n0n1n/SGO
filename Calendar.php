@@ -1,6 +1,8 @@
 <?php
-// calendar 0.2
+// calendar 0.3 working fetching data, exporting file
 // Get form data
+
+
 if (isset($_POST['task']) && isset($_POST['date'])) {
     $task = $_POST['task'];
     $date = $_POST['date'];
@@ -148,5 +150,60 @@ if (isset($_GET['fetch_tasks'])) {
 
     // Close connection
     $conn->close();
+}
+
+// Function to export tasks to CSV
+if (isset($_GET['export_excel'])) {
+    // Get the filename from the GET request
+    $filename = isset($_GET['filename']) ? $_GET['filename'] : "tasks_" . date("Y-m-d_H-i-s");
+
+    // Create connection
+    $conn = mysqli_connect('sql306.infinityfree.com', 'if0_38391513', 'tpftcimd', 'if0_38391513_demo');
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Fetch tasks
+    $tasks = [];
+    $result = $conn->query("SELECT * FROM tasks");
+    while ($row = $result->fetch_assoc()) {
+        $tasks[] = $row;
+    }
+
+    // Fetch archived tasks
+    $archivedTasks = [];
+    $result = $conn->query("SELECT * FROM archived_tasks");
+    while ($row = $result->fetch_assoc()) {
+        $archivedTasks[] = $row;
+    }
+
+    // Set the header for the response
+    $filename .= ".csv";
+    header('Content-Type: text/csv');
+    header("Content-Disposition: attachment;filename=\"$filename\"");
+    header('Cache-Control: max-age=0');
+
+    // Open the output stream
+    $output = fopen('php://output', 'w');
+
+    // Write the header row
+    fputcsv($output, ['Task', 'Date', 'Status']);
+
+    // Write the data rows
+    foreach ($tasks as $task) {
+        fputcsv($output, [$task['task'], $task['date'], 'Active']);
+    }
+    foreach ($archivedTasks as $task) {
+        fputcsv($output, [$task['task'], $task['date'], 'Archived']);
+    }
+
+    // Close the output stream
+    fclose($output);
+
+    // Close connection
+    $conn->close();
+    exit;
 }
 ?>
